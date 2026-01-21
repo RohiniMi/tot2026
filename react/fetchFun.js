@@ -1,7 +1,10 @@
 const products = document.getElementById("products");
 const btn = document.getElementById("btn");
+const loader = document.getElementById("loader");
+
 const fun = async () => {
     try {
+        loader.innerHTML = `<>loding...</>`
         const data = await fetch("https://fakestoreapi.com/products");
         const res = await data.json();
         const table = document.createElement("table");
@@ -18,9 +21,11 @@ const fun = async () => {
 
     } catch (error) {
         console.log(error);
+    } finally {
+        loader.innerHTML = ``;
     }
 }
-btn.addEventListener("click",(e)=>{
+btn.addEventListener("click", (e) => {
     e.preventDefault();
     fun();
 })
